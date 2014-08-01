@@ -1,6 +1,6 @@
 # grunt-createjs-manifests
 
-Grunt plugin to combine the manifests of multiple CreateJS exported files.
+Grunt plugin to combine the manifests from multiple CreateJS exported files and output to a JSON file.
 
 ## Install
 
