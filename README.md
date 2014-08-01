@@ -5,7 +5,7 @@ Grunt plugin to combine the manifests from multiple CreateJS exported files and 
 ## Install
 
 ```shell
-npm install CloudKidStudio/grunt-createjs-manifests
+npm install grunt-createjs-manifests
 ```
 
 ## Usage 
