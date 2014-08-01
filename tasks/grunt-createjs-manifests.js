@@ -13,7 +13,8 @@ module.exports = function(grunt)
 			insert = data.insert || '',
 			output = data.output,
 			files = data.files,
-			manifest = {};
+			manifest = {},
+			manifestFiles = [];
 
 		if (!output)
 		{
@@ -43,10 +44,14 @@ module.exports = function(grunt)
 				str.search(/\;[\n\t\r]*\/\/ stage content\:/)
 			);
 			eval("properties = " + properties);
-			_.each(properties.manifest, function(asset, i){
+			var assets = properties.manifest;
+			_.each(assets, function(asset, i){
 				asset.src = insert + asset.src.replace(remove, '');
 			});
-			manifest[path.basename(file, '.js')] = properties.manifest;
+			manifest[path.basename(file, '.js')] = assets;
+
+			// Add to a single collection of all manifest files
+			manifestFiles = manifestFiles.concat(assets);
 		}
 
 		_.each(_.isArray(files) ? files : [files], function(file){
@@ -63,6 +68,24 @@ module.exports = function(grunt)
 		});
 
 		grunt.file.write(output, JSON.stringify(manifest, null, "\t"));
+
+		// The duplicate assets id, so we don't check the same asset
+		// more than once
+		var dupes = [];
+
+		// Get the dirty duplicates
+		_.each(manifestFiles, function(asset){
+			// Check for duplicates with the id and different source files
+			_.each(manifestFiles, function(check){
+				if (check.src != asset.src && check.id == asset.id && dupes.indexOf(check.id) === -1)
+				{
+					log.subhead("Warning: The asset ID ('" + check.id + "') has multiple sources:");
+					log.warn(check.src);
+					log.warn(asset.src);
+					dupes.push(check.id);
+				}
+			});
+		});
 
 		done();
 	});
