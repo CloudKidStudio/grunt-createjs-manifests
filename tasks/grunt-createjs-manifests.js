@@ -46,7 +46,16 @@ module.exports = function(grunt)
 			eval("properties = " + properties);
 			var assets = properties.manifest;
 			_.each(assets, function(asset, i){
-				asset.src = insert + asset.src.replace(remove, '');
+				// don't include any sound files published with the manifest
+				if (asset.src.indexOf('mp3') !== -1 || asset.src.indexOf('.wav') !== -1)
+				{
+
+					assets.splice(i, 1);
+				}
+				else
+				{
+					asset.src = insert + asset.src.replace(remove, '');
+				}
 			});
 			manifest[path.basename(file, '.js')] = assets;
 
