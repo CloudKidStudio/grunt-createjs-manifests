@@ -30,4 +30,5 @@ Property | Type | Description | Default
 **files** | _string,array_ | The list of files or single file, also accepts * wildcard | null
 **remove** (optional) | _string_ | The string to remove from each manifest file path | ""
 **insert** (optional) | _string_ | The string to prepend to each manifest file path | ""
+**excludeAudio** (optional) | _boolean_ | Exlude any audio files from createjs in the manifest | true 
 **cwd** (optional) | _string_ | The current working directory | "./" 

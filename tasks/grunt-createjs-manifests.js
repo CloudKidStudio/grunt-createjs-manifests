@@ -11,6 +11,7 @@ module.exports = function(grunt)
 			cwd = data.cwd || process.cwd(),
 			remove = data.remove || '',
 			insert = data.insert || '',
+			excludeAudio = _.isUndefined(data.excludeAudio) ? true : !!data.excludeAudio,
 			output = data.output,
 			files = data.files,
 			manifest = {},
@@ -46,17 +47,18 @@ module.exports = function(grunt)
 			eval("properties = " + properties);
 			var assets = properties.manifest;
 			_.each(assets, function(asset, i){
-				// don't include any sound files published with the manifest
-				if (asset.src.indexOf('mp3') !== -1 || asset.src.indexOf('.wav') !== -1)
-				{
-
-					assets.splice(i, 1);
-				}
-				else
-				{
-					asset.src = insert + asset.src.replace(remove, '');
-				}
+				asset.src = insert + asset.src.replace(remove, '');
 			});
+
+			// exclude createjs audio export paths from the manifest
+			if (excludeAudio)
+			{
+				assets = _.filter(assets, function(asset) 
+				{
+					return !/\.(mp3|wav|aif|aiff)$/.test(asset.src);
+				});
+			}
+			
 			manifest[path.basename(file, '.js')] = assets;
 
 			// Add to a single collection of all manifest files
