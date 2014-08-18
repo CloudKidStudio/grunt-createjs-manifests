@@ -42,7 +42,7 @@ module.exports = function(grunt)
 
 			var properties = str.substring(
 				start + token.length, 
-				str.search(/\;[\n\t\r]*\/\/ stage content\:/)
+				str.search(/\;[\n\t\r]*\/\/ symbols\:/)
 			);
 			eval("properties = " + properties);
 			var assets = properties.manifest;
