@@ -1,6 +1,6 @@
 {
   "name": "grunt-createjs-manifests",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Grunt plugin to combine the manifests of multiple CreateJS exported files.",
   "main": "./tasks/grunt-createjs-manifests.js",
   "author": {
