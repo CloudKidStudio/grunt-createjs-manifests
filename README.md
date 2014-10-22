@@ -1,5 +1,7 @@
 # grunt-createjs-manifests
 
+[![Dependency Status](https://david-dm.org/CloudKidStudio/grunt-createjs-manifests.svg)](https://david-dm.org/CloudKidStudio/grunt-createjs-manifests)
+
 Grunt plugin to combine the manifests from multiple CreateJS exported files and output to a JSON file.
 
 ## Install
