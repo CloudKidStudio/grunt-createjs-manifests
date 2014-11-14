@@ -1,6 +1,4 @@
-# grunt-createjs-manifests
-
-[![Dependency Status](https://david-dm.org/CloudKidStudio/grunt-createjs-manifests.svg)](https://david-dm.org/CloudKidStudio/grunt-createjs-manifests)
+# grunt-createjs-manifests [![Dependency Status](https://david-dm.org/SpringRoll/grunt-createjs-manifests.svg)](https://david-dm.org/SpringRoll/grunt-createjs-manifests)
 
 Grunt plugin to combine the manifests from multiple CreateJS exported files and output to a JSON file.
 
