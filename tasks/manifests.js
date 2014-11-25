@@ -44,7 +44,9 @@ module.exports = function(grunt)
 				start + token.length, 
 				str.search(/\;[\n\t\r]*\/\/ symbols\:/)
 			);
+			/* jshint ignore:start */
 			eval("properties = " + properties);
+			/* jshint ignore:end */
 			var assets = properties.manifest;
 			_.each(assets, function(asset, i){
 				asset.src = insert + asset.src.replace(remove, '');
