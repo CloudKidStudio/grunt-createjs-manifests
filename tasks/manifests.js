@@ -74,9 +74,7 @@ module.exports = function(grunt)
 			// Glob expression with wildcard
 			else 
 			{
-				glob(file, { cwd: cwd, sync: true }, function(er, globFiles) {
-					_.each(globFiles, addManifest);
-				});
+				_.each(glob.sync(file, {cwd: cwd}), addManifest);
 			}
 		});
 
