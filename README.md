@@ -1,4 +1,6 @@
-# grunt-createjs-manifests [![Build Status](https://travis-ci.org/SpringRoll/grunt-createjs-manifests.svg)](https://travis-ci.org/SpringRoll/grunt-createjs-manifests) [![Dependency Status](https://david-dm.org/SpringRoll/grunt-createjs-manifests.svg)](https://david-dm.org/SpringRoll/grunt-createjs-manifests) [![npm version](https://badge.fury.io/js/grunt-createjs-manifests.svg)](http://badge.fury.io/js/grunt-createjs-manifests)
+# grunt-createjs-manifests
+
+[![Build Status](https://travis-ci.org/SpringRoll/grunt-createjs-manifests.svg)](https://travis-ci.org/SpringRoll/grunt-createjs-manifests) [![Dependency Status](https://david-dm.org/SpringRoll/grunt-createjs-manifests.svg)](https://david-dm.org/SpringRoll/grunt-createjs-manifests) [![npm version](https://badge.fury.io/js/grunt-createjs-manifests.svg)](http://badge.fury.io/js/grunt-createjs-manifests)
 
 Grunt plugin to combine the manifests from multiple CreateJS exported files and output to a JSON file.
 
