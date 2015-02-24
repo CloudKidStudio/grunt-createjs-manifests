@@ -1,6 +1,6 @@
 {
 	"name": "grunt-createjs-manifests",
-	"version": "0.0.10",
+	"version": "0.0.11",
 	"description": "Grunt plugin to combine the manifests of multiple CreateJS exported files.",
 	"main": "./tasks/manifests.js",
 	"author": {
@@ -13,7 +13,7 @@
 		"url": "https://github.com/SpringRoll/grunt-createjs-manifests"
 	},
 	"dependencies": {
-		"glob": "~4.3.1"
+		"glob": "~4.4.0"
 	},
 	"devDependencies": {
 		"grunt-contrib-jshint": "~0.10.0",
