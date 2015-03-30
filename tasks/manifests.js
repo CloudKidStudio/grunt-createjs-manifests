@@ -1,24 +1,27 @@
 module.exports = function(grunt)
 {
+	// Include libraries
+	var glob = require("glob"),
+		path = require('path'),
+		_ = require('lodash');
+
 	grunt.registerMultiTask('manifests', "Concat CreateJS manifests", function()
 	{
 		// prepare options
 		var options = this.options(
 		{
-			space: ""
+			space: "", // JSON stringify whitespace
+			lowercase: true, // lowercase the key
+			audio: false // show the audio
 		});
 
-		var glob = require("glob"),
-			path = require('path'),
-			_ = grunt.util._,
-			log = grunt.log,
+		var log = grunt.log,
 			done = this.async;
 
 		var data = this.data,
 			cwd = data.cwd || process.cwd(),
 			remove = data.remove || '',
 			insert = data.insert || '',
-			excludeAudio = _.isUndefined(data.excludeAudio) ? true : !!data.excludeAudio,
 			output = data.output,
 			files = data.files,
 			manifest = {},
@@ -55,12 +58,13 @@ module.exports = function(grunt)
 			eval("properties = " + properties);
 			/* jshint ignore:end */
 			var assets = properties.manifest;
+			
 			_.each(assets, function(asset, i){
 				asset.src = insert + asset.src.replace(remove, '');
 			});
 
 			// exclude createjs audio export paths from the manifest
-			if (excludeAudio)
+			if (!options.audio)
 			{
 				assets = _.filter(assets, function(asset) 
 				{
@@ -68,7 +72,12 @@ module.exports = function(grunt)
 				});
 			}
 			
-			manifest[path.basename(file, '.js')] = assets;
+			var name = path.basename(file, '.js');
+			if (options.lowercase)
+			{
+				name = name.charAt(0).toLowerCase() + name.substr(1);
+			}
+			manifest[name] = assets;
 
 			// Add to a single collection of all manifest files
 			manifestFiles = manifestFiles.concat(assets);
@@ -77,7 +86,9 @@ module.exports = function(grunt)
 		_.each(_.isArray(files) ? files : [files], function(file){
 			// Regular file include
 			if (file.indexOf("*") === -1) 
+			{
 				addManifest(file);
+			}
 			// Glob expression with wildcard
 			else 
 			{

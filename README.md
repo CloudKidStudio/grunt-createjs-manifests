@@ -34,3 +34,32 @@ Property | Type | Description | Default
 **insert** (optional) | _string_ | The string to prepend to each manifest file path | ""
 **excludeAudio** (optional) | _boolean_ | Exlude any audio files from createjs in the manifest | true 
 **cwd** (optional) | _string_ | The current working directory | "./" 
+
+## Options
+
+Option | Type | Description | Default
+---|---|---|---
+**space** (optional) | _string_ | White-space character for JSON stringify output | ""
+**lowercase** (optional) | _boolean_ | If the manifest keys should be lowercased (first character is lowercased) | true
+**audio** (optional) | _boolean_ | If we should include audio files (.mp3, etc) | false 
+
+```js
+grunt.initConfig({
+	manifests: {
+		release: {
+			output: "manifests.json",
+			files: "src/assets/*.js",
+			remove: "../../deploy/"
+		},
+		debug: {
+			output: "manifests.json",
+			files: "src/assets/*.js",
+			remove: "../../deploy/",
+			options: {
+				// output is easier to read
+				space: "\t"
+			}
+		}
+	}
+});
+```
