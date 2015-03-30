@@ -1,6 +1,13 @@
 module.exports = function(grunt)
 {
-	grunt.registerMultiTask('manifests', "Concat CreateJS manifests", function(){
+	grunt.registerMultiTask('manifests', "Concat CreateJS manifests", function()
+	{
+		// prepare options
+		var options = this.options(
+		{
+			space: ""
+		});
+
 		var glob = require("glob"),
 			path = require('path'),
 			_ = grunt.util._,
@@ -78,7 +85,7 @@ module.exports = function(grunt)
 			}
 		});
 
-		grunt.file.write(output, JSON.stringify(manifest, null, "\t"));
+		grunt.file.write(output, JSON.stringify(manifest, null, options.space));
 
 		// The duplicate assets id, so we don't check the same asset
 		// more than once
