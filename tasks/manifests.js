@@ -43,23 +43,31 @@ module.exports = function(grunt)
 
 		function addManifest(file)
 		{
-			var str = grunt.file.read(file);
-			var token = "manifest: [";
-			var start = str.indexOf(token);
+			var properties, assets;
 
-			// Ignore if we don't have the lib.properities
-			if (start === -1) return;
+			// Check for the external JSON file
+			if (grunt.file.exists(file + "on"))
+			{
+				properties = grunt.file.readJSON(file + "on");
+			}
+			// Parse the properties from createjs output
+			else
+			{
+				var str = grunt.file.read(file);
+				var result = /properties = [^;]+;/gm.exec(str);
+				if (result)
+				{
+					/* jshint ignore:start */
+					eval(String(result));
+					/* jshint ignore:end */
+				}
+				else 
+				{
+					return;
+				}
+			}
 
-			var assets = str.substring(
-				// -1 so we include the opening bracket in the substring, but 
-				// don't have to remove it from the search
-				start + token.length - 1,
-				str.search(/\]/) + 1
-			);
-
-			/* jshint ignore:start */
-			eval("assets = " + assets);
-			/* jshint ignore:end */
+			assets = properties.manifest;
 
 			_.each(assets, function(asset, i)
 			{
