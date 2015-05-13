@@ -8,13 +8,15 @@ module.exports = function(grunt)
 {
 	'use strict';
 
-	grunt.initConfig({
-	    jshint: {
+	grunt.initConfig(
+	{
+		jshint:
+		{
 			all: [
 				'Gruntfile.js',
 				'tasks/*.js'
 			]
-	    }
+		}
 	});
 	grunt.loadNpmTasks('grunt-simple-version');
 	grunt.loadNpmTasks('grunt-contrib-jshint');

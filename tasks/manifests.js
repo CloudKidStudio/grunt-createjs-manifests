@@ -44,34 +44,37 @@ module.exports = function(grunt)
 		function addManifest(file)
 		{
 			var str = grunt.file.read(file);
-			var token = "lib.properties = ";
+			var token = "manifest: [";
 			var start = str.indexOf(token);
 
 			// Ignore if we don't have the lib.properities
 			if (start === -1) return;
 
-			var properties = str.substring(
-				start + token.length, 
-				str.search(/\;[\n\t\r]*\/\/ symbols\:/)
+			var assets = str.substring(
+				// -1 so we include the opening bracket in the substring, but 
+				// don't have to remove it from the search
+				start + token.length - 1,
+				str.search(/\]/) + 1
 			);
+
 			/* jshint ignore:start */
-			eval("properties = " + properties);
+			eval("assets = " + assets);
 			/* jshint ignore:end */
-			var assets = properties.manifest;
-			
-			_.each(assets, function(asset, i){
+
+			_.each(assets, function(asset, i)
+			{
 				asset.src = insert + asset.src.replace(remove, '');
 			});
 
 			// exclude createjs audio export paths from the manifest
 			if (!options.audio)
 			{
-				assets = _.filter(assets, function(asset) 
+				assets = _.filter(assets, function(asset)
 				{
 					return !/\.(mp3|wav|aif|aiff)$/.test(asset.src);
 				});
 			}
-			
+
 			var name = path.basename(file, '.js');
 			if (options.lowercase)
 			{
@@ -83,16 +86,20 @@ module.exports = function(grunt)
 			manifestFiles = manifestFiles.concat(assets);
 		}
 
-		_.each(_.isArray(files) ? files : [files], function(file){
+		_.each(_.isArray(files) ? files : [files], function(file)
+		{
 			// Regular file include
-			if (file.indexOf("*") === -1) 
+			if (file.indexOf("*") === -1)
 			{
 				addManifest(file);
 			}
 			// Glob expression with wildcard
-			else 
+			else
 			{
-				_.each(glob.sync(file, {cwd: cwd}), addManifest);
+				_.each(glob.sync(file,
+				{
+					cwd: cwd
+				}), addManifest);
 			}
 		});
 
@@ -103,9 +110,11 @@ module.exports = function(grunt)
 		var dupes = [];
 
 		// Get the dirty duplicates
-		_.each(manifestFiles, function(asset){
+		_.each(manifestFiles, function(asset)
+		{
 			// Check for duplicates with the id and different source files
-			_.each(manifestFiles, function(check){
+			_.each(manifestFiles, function(check)
+			{
 				if (check.src != asset.src && check.id == asset.id && dupes.indexOf(check.id) === -1)
 				{
 					log.subhead("Warning: The asset ID ('" + check.id + "') has multiple sources:");
