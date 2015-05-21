@@ -40,8 +40,9 @@ Property | Type | Description | Default
 Option | Type | Description | Default
 ---|---|---|---
 **space** (optional) | _string_ | White-space character for JSON stringify output | ""
-**lowercase** (optional) | _boolean_ | If the manifest keys should be lowercased (first character is lowercased) | true
+**lowercase** (optional) | _boolean_ | If the manifest keys should be lowercased (first character is lowercased) | false
 **audio** (optional) | _boolean_ | If we should include audio files (.mp3, etc) | false 
+**ignoreEmpties** (optional) | _boolean_ | Ignore manifests which are empty of assets | true 
 
 ```js
 grunt.initConfig({

@@ -11,8 +11,9 @@ module.exports = function(grunt)
 		var options = this.options(
 		{
 			space: "", // JSON stringify whitespace
-			lowercase: true, // lowercase the key
-			audio: false // show the audio
+			lowercase: false, // lowercase the key
+			audio: false,// show the audio
+			ignoreEmpties: true // ignore manifest that are empty
 		});
 
 		var log = grunt.log,
@@ -82,6 +83,9 @@ module.exports = function(grunt)
 					return !/\.(mp3|wav|aif|aiff)$/.test(asset.src);
 				});
 			}
+
+			// Ignore empty manifest arrays
+			if (options.ignoreEmpties && !assets.length) return;
 
 			var name = path.basename(file, '.js');
 			if (options.lowercase)
