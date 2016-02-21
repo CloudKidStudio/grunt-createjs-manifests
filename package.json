@@ -3,30 +3,25 @@
 	"version": "0.2.0",
 	"description": "Grunt plugin to combine the manifests of multiple CreateJS exported files.",
 	"main": "./tasks/manifests.js",
-	"author":
-	{
+	"author": {
 		"name": "Matt Karl",
 		"email": "matt@cloudkid.com"
 	},
 	"license": "MIT",
-	"repository":
-	{
+	"repository": {
 		"type": "git",
 		"url": "https://github.com/SpringRoll/grunt-createjs-manifests"
 	},
-	"dependencies":
-	{
+	"dependencies": {
 		"glob": "~5.0.3",
 		"lodash": "^3.6.0"
 	},
-	"devDependencies":
-	{
+	"devDependencies": {
 		"grunt-contrib-jshint": "~0.10.0",
 		"grunt-simple-version": "~0.2.0"
 	},
-	"peerDependencies":
-	{
-		"grunt": "~0.4.5"
+	"peerDependencies": {
+		"grunt": ">=0.4.0"
 	},
 	"keywords": [
 		"gruntplugin",
@@ -35,13 +30,11 @@
 		"flash",
 		"manifests"
 	],
-	"scripts":
-	{
+	"scripts": {
 		"test": "grunt test --verbose"
 	},
 	"readmeFilename": "README.md",
-	"bugs":
-	{
+	"bugs": {
 		"url": "https://github.com/SpringRoll/grunt-createjs-manifests/issues"
 	},
 	"homepage": "https://github.com/SpringRoll/grunt-createjs-manifests"
